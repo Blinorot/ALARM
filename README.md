@@ -18,7 +18,7 @@ Audio–Language Alignment for Reasoning Models
 
 <p align="center">
 <a href="https://arxiv.org/abs/2603.09556">
-  <img src="https://img.shields.io/badge/arXiv-2603.09556-b31b1b.svg?logo=arxiv&logoColor=white">
+  <img src="https://img.shields.io/badge/Paper-arXiv%3A2603.09556-b31b1b.svg?logo=arxiv&logoColor=white">
 </a>
 <a href="https://hf.co/collections/Blinorot/alarm">
   <img src="https://img.shields.io/badge/HuggingFace-Collection-yellow.svg?logo=huggingface&logoColor=white">
