@@ -1,0 +1,91 @@
+groups:
+  speech:
+    - cameo
+    - globe_v3
+    - vctk
+    # - vocalsound
+    # - ascend
+    # - disfluencyspeech
+    - nisqa
+    # - mucs
+    # - mls
+    # - librispeech
+    # - asvspoof19
+    # - asvspoof5
+    - noisy_vctk
+  # complicated_speech:
+  #   - voxceleb1
+  #   - alimeeting
+  #   - amicorpus
+  #   - meld
+  #   - dailytalk
+  #   - librimix
+  # event:
+  #   - audiocaps
+  #   - clotho
+  # music:
+  #   - gtzan
+  #   - opensinger
+  #   - singmos
+  #   - mridangam
+  #   - nsynth
+  #   - fma
+  #   - sonicmaster
+  # environment:
+  #   - esc50
+  #   - fsd50k
+  #   - audioset
+  # instruction:
+  #   - heysquad
+train:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [cameo_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [globe_v3_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [vctk_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [nisqa_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [noisy_vctk_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: train
+  limit: null
+  return_audio: true
+  name: "speech"
+cameo:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [cameo_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "cameo"
+globe_v3:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [globe_v3_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "globe_v3"
+vctk:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [vctk_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "vctk"
+nisqa:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [nisqa_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "nisqa"
+noisy_vctk:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [noisy_vctk_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "noisy_vctk"

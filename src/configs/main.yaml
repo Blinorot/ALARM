@@ -1,0 +1,53 @@
+defaults:
+  - dataset: heysquad
+  - model: whisper
+  - _self_
+
+eval_mode: false # only run evaluate
+
+resume_from_checkpoint: null
+model_max_length: 4096
+
+# change to another dir if you want to use non "data" dir
+alternative_data_dir: null
+
+# set to dir with adapter checkpoints (data/pretrained_weights)
+# to init adapters from pretrained weights
+pretrained_adapters_dir: null
+pretrained_adapters_names: null # specific names to init (init all by default)
+freeze_adapters: false
+frozen_adapters_names: null # specific names to freeze (freeze all by default)
+
+freeze_fusion: false
+
+sample_generations: true
+
+training_args:
+  dataloader_num_workers: 0
+  bf16: true
+  output_dir: "saved/testing"
+  eval_strategy: "steps"
+  eval_steps: 15000
+  do_eval: true
+  per_device_train_batch_size: 8
+  per_device_eval_batch_size: 4
+  gradient_accumulation_steps: 4
+  learning_rate: 1e-4
+  max_grad_norm: 1
+  num_train_epochs: 40
+  logging_steps: 100
+  logging_strategy: steps
+  lr_scheduler_type: cosine
+  overwrite_output_dir: true
+  push_to_hub: false
+  remove_unused_columns: false
+  report_to: tensorboard
+  save_strategy: ${training_args.eval_strategy}
+  save_steps: ${training_args.eval_steps}
+  save_total_limit: null
+  seed: 42
+  warmup_steps: 1500
+  ddp_find_unused_parameters: false
+  dataloader_drop_last: true
+  gradient_checkpointing: false
+  label_names: ["labels"]

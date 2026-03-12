@@ -1,0 +1,21 @@
+# model name and input space embedding dim
+llm: Qwen/Qwen3-4B-Thinking-2507
+llm_embedding_dim: 2560
+# vllm configuration
+max_tokens: 8192
+max_thinking_tokens: 1024
+max_model_len: 16384
+max_num_seq: 32
+max_num_batched_tokens: 16384
+gpu_memory_utilization: 0.70
+seed: null
+# definition of feature extractors
+feature_extractor_configs:
+  - encoder_name: whisper
+  - encoder_name: w2vbert
+  - encoder_name: sslam
+  - encoder_name: muq
+config:
+  # wether to add explicit <start_audio> and <end_audio> text tokens
+  use_explicit_audio_tokens: false
+

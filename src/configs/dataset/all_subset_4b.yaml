@@ -1,0 +1,166 @@
+groups:
+  speech:
+    - cameo
+    - globe_v3
+    - vctk
+    # - vocalsound
+    # - ascend
+    # - disfluencyspeech
+    - nisqa
+    # - mucs
+    # - mls
+    # - librispeech
+    # - asvspoof19
+    # - asvspoof5
+    - noisy_vctk
+  # complicated_speech:
+  #   - voxceleb1
+  #   - alimeeting
+  #   - amicorpus
+  #   - meld
+  #   - dailytalk
+  #   - librimix
+  # event:
+  #   - audiocaps
+  #   - clotho
+  music:
+  #   - gtzan
+  #   - opensinger
+  #   - singmos
+  #   - mridangam
+    - nsynth
+  #   - fma
+    - sonicmaster
+  environment:
+    - esc50
+    - fsd50k
+    - audioset
+  instruction:
+    - heysquad
+train:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [heysquad_human_filtered_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [heysquad_human_filtered_Qwen3-4B-Thinking-2507_512, "NoContext", 1.0, false]
+    - [instructs2s_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [cameo_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [globe_v3_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [vctk_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [nisqa_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [noisy_vctk_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [nsynth_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [sonicmaster_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [audiocaps_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [clotho_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [esc50_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [fsd50k_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [audioset_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 0.2, false]
+  split: train
+  limit: null
+  return_audio: true
+  name: "content"
+heysquad_human:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [heysquad_human_filtered_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [heysquad_human_filtered_Qwen3-4B-Thinking-2507_512, "NoContext", 1.0, false]
+  split: validation
+  limit: null
+  return_audio: true
+  name: "heysquad_human"
+cameo:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [cameo_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "cameo"
+globe_v3:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [globe_v3_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "globe_v3"
+vctk:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [vctk_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "vctk"
+nisqa:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [nisqa_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "nisqa"
+noisy_vctk:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [noisy_vctk_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "noisy_vctk"
+nsynth:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [nsynth_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "nsynth"
+sonicmaster:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [sonicmaster_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "sonicmaster"
+audiocaps:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [audiocaps_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "audiocaps"
+clotho:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [clotho_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "clotho"
+esc50:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [esc50_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "esc50"
+fsd50k:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [fsd50k_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "fsd50k"
+audioset:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [audioset_rephrased_1536_Qwen3-4B-Thinking-2507_512, "WithContext", 0.2, false]
+  split: validation # created via train_test_split
+  limit: null
+  return_audio: true
+  name: "audioset"

@@ -1,0 +1,58 @@
+groups:
+  # speech:
+  #   - cameo
+  #   - globe_v3
+  #   - vctk
+  #   - vocalsound
+  #   - ascend
+  #   - disfluencyspeech
+  #   - nisqa
+  #   - mucs
+  #   - mls
+  #   - librispeech
+  #   - asvspoof19
+  #   - asvspoof5
+  #   - noisy_vctk
+  # complicated_speech:
+  #   - voxceleb1
+  #   - alimeeting
+  #   - amicorpus
+  #   - meld
+  #   - dailytalk
+  #   - librimix
+  # event:
+  #   - audiocaps
+  #   - clotho
+  # music:
+  #   - gtzan
+  #   - opensinger
+  #   - singmos
+  #   - mridangam
+  #   - nsynth
+  #   - fma
+  #   - sonicmaster
+  # environment:
+  #   - esc50
+  #   - fsd50k
+  #   - audioset
+  instruction:
+    - heysquad
+train:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [heysquad_human_filtered_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [heysquad_human_filtered_Qwen3-4B-Thinking-2507_512, "NoContext", 1.0, false]
+    - [instructs2s_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+  split: train
+  limit: null
+  return_audio: true
+  name: "content"
+heysquad_human:
+  _target_: src.dataset.HFDataset
+  dataset_names:
+    - [heysquad_human_filtered_Qwen3-4B-Thinking-2507_512, "WithContext", 1.0, false]
+    - [heysquad_human_filtered_Qwen3-4B-Thinking-2507_512, "NoContext", 1.0, false]
+  split: validation
+  limit: null
+  return_audio: true
+  name: "heysquad_human"

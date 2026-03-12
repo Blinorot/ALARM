@@ -1,0 +1,76 @@
+llm: Qwen/Qwen3-0.6B
+feature_extractor_configs:
+  - encoder_name: whisper
+  - encoder_name: w2vbert
+  - encoder_name: sslam
+  - encoder_name: muq
+from_pretrained: null
+llm_embedding_dim: 1024
+config:
+  use_explicit_audio_tokens: false
+  audio_sep_d_embed: ${model.llm_embedding_dim}
+  audio_encoder_configs:
+    - encoder_name: whisper
+    - encoder_name: sslam
+    - encoder_name: muq
+    - encoder_name: w2vbert
+  audio_adapter_configs:
+    - encoder_name: whisper
+      adapter_name: "downsampler_conformer"
+      layer_fusion_config:
+        layer_fusion_type: weighted_average
+      audio_encoder_layers: [7, 15, 23, 31]
+      norm_type: "batch"
+      pre_average: true
+      downsampler_depth: 1
+      use_conformer: false
+      encoder_embedding_dim: 1280
+      adapter_embedding_dim: 1024
+      llm_embedding_dim: ${model.llm_embedding_dim}
+    - encoder_name: sslam
+      adapter_name: "downsampler_conformer"
+      layer_fusion_config:
+        layer_fusion_type: weighted_average
+      audio_encoder_layers: [3, 7, 11]
+      norm_type: "layer"
+      pre_average: true
+      downsampler_depth: 1
+      use_conformer: false
+      encoder_embedding_dim: 768
+      adapter_embedding_dim: 1024
+      llm_embedding_dim: ${model.llm_embedding_dim}
+    - encoder_name: muq
+      adapter_name: "mlp"
+      layer_fusion_config:
+        layer_fusion_type: weighted_average
+      audio_encoder_layers: [4, 8, 12]
+      pre_average: true
+      encoder_embedding_dim: 1024
+      hidden_dim: 1024
+      adapter_embedding_dim: 1024
+      llm_embedding_dim: ${model.llm_embedding_dim}
+    - encoder_name: w2vbert
+      adapter_name: "downsampler_conformer"
+      layer_fusion_config:
+        layer_fusion_type: weighted_average
+      audio_encoder_layers: [6, 10, 15, 20, 24]
+      norm_type: "layer"
+      pre_average: true
+      downsampler_depth: 1
+      use_conformer: false
+      encoder_embedding_dim: 1024
+      adapter_embedding_dim: 1024
+      llm_embedding_dim: ${model.llm_embedding_dim}
+  audio_fusion_config:
+    fusion_type: "crossattention"
+    llm_embedding_dim: ${model.llm_embedding_dim}
+    hidden_dim: 1024
+    ffn_dims: 4096
+    dropout: 0.1
+    num_attention_heads: 16
+    num_hidden_layers: [1, 1, 1]
+    main_encoder: "whisper"
+    conditional_encoders: ["w2vbert", "muq", "sslam"]
+    use_skip_connection: false
+  audio_postprocessing_config:
+    postprocessing_type: "identity"

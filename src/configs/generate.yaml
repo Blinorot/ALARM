@@ -1,0 +1,32 @@
+defaults:
+  - model: alarm_ca
+  - _self_
+
+model:
+  llm: Qwen/Qwen3-4B-Thinking-2507
+  llm_embedding_dim: 2560
+  max_tokens: 8192
+  max_thinking_tokens: 1024
+  max_model_len: 16384
+  max_num_seq: 32
+  max_num_batched_tokens: 16384
+  gpu_memory_utilization: 0.70
+
+dataset:
+  name: "mmar"
+  limit: -1
+  debug_ind: -1
+  split: null
+  shuffle: false
+
+batch_size: 32
+checkpoint_name: "Blinorot/ALARM-CA" # remote or local checkpoint
+
+cuda_devices: "0"
+seed: null
+
+push_to_hub: false
+hf_username: Blinorot
+hf_repo_name: mmar
+hf_public: false
+save_audio: false

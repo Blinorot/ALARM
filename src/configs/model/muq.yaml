@@ -1,0 +1,25 @@
+llm: Qwen/Qwen3-0.6B
+feature_extractor_configs:
+  - encoder_name: muq
+from_pretrained: null
+llm_embedding_dim: 1024
+config:
+  use_explicit_audio_tokens: false
+  audio_sep_d_embed: ${model.llm_embedding_dim}
+  audio_encoder_configs:
+    - encoder_name: muq
+  audio_adapter_configs:
+    - encoder_name: muq
+      adapter_name: "mlp"
+      layer_fusion_config:
+        layer_fusion_type: weighted_average
+      audio_encoder_layers: [4, 8, 12]
+      pre_average: true
+      encoder_embedding_dim: 1024
+      hidden_dim: 1024
+      adapter_embedding_dim: 1024
+      llm_embedding_dim: ${model.llm_embedding_dim}
+  audio_fusion_config:
+    fusion_type: "sum"
+  audio_postprocessing_config:
+    postprocessing_type: "identity"
