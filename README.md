@@ -51,7 +51,7 @@ uv pip install -r requirements.txt --torch-backend=cu128
 
 ## Inference
 
-All model checkpoints are available on [HuggingFace](https://hf.co/collections/Blinorot/alarm). We also provide [vLLM](https://github.com/vllm-project/vllm) support using [vLLM Prompt Embedding API](https://docs.vllm.ai/en/stable/features/prompt_embeds/). Since ALARM uses the frozen Qwen3 model as the backbone, `vllm` just runs the original Qwen3 checkpoint, and the ALARM checkpoint is used for extracting LLM input embeddings. After you cloned the repo and installed the depnedencies, you can run the pretrained model as follows:
+All model checkpoints are available on [HuggingFace](https://hf.co/collections/Blinorot/alarm). We also provide [vLLM](https://github.com/vllm-project/vllm) support using [vLLM Prompt Embedding API](https://docs.vllm.ai/en/stable/features/prompt_embeds/). Since ALARM uses the frozen Qwen3 model as the backbone, `vllm` just runs the original Qwen3 checkpoint, and the ALARM checkpoint is used for extracting LLM input embeddings. After you cloned the repo and installed the dependencies, you can run the pretrained model as follows:
 
 ```python
 # Import libraries
@@ -235,10 +235,10 @@ As MMSU and AIR-Bench have lots of small files, you may need to restart download
 Once the data is ready, the next step is to obtain responses from our model. We call the `generate_vllm_mcqa.py` script for that. Its CLI interface is the same as for the `generate_vllm.py` discussed in the [Inference](#inference) section. Alternatively, you can simply run the `run_eval.sh` wrapper. For example:
 
 ```bash
-run_eval.sh mmsu whisper_w2vbert_sslam_muq_crossattn "Blinorot/ALARM-CA" "test" 8
+run_eval.sh mmsu alarm_ca "Blinorot/ALARM-CA" "test" 8
 ```
 
-See `run_eval.sh` for arguments definition. The responses will be saved in `data/datasets/generated/LLM*MODEL_NAME/{benchmark_name}_{checkpoint_name}_{Optional:seed_{seed}}_{max_tokens}_{max_thinking_tokens}`.
+See `run_eval.sh` for arguments definition. The responses will be saved in `data/datasets/generated/LLM_MODEL_NAME/{benchmark_name}_{checkpoint_name}_{Optional:seed_{seed}}_{max_tokens}_{max_thinking_tokens}`.
 
 Finally, we need to get `.json` from responses and calculate the scores using the official benchmark scripts. To do so, we call:
 
