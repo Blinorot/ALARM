@@ -2,7 +2,7 @@
 ALARM:<br>
 Audio–Language Alignment for Reasoning Models
   <br>
-  [Under Review in Interspeech2026]
+  [Interspeech2026]
 </h1>
 
 <p align="center">
